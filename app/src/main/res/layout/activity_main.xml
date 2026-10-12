@@ -1,114 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
-    android:background="#0F172A">
+    android:background="#0B1120"
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_launcher_foreground" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call Shield"
-        android:textColor="#38BDF8"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gerenciador e Proteção de Chamadas"
-        android:textColor="#94A3B8"
-        android:textSize="14sp"
-        android:layout_marginBottom="32dp" />
-
-    <!-- Card de Bloqueio SIM -->
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="#1E293B">
+        android:orientation="vertical"
+        android:padding="20dp">
 
+        <!-- Top Bar / App Brand -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switchBlockCalls"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="@drawable/ic_launcher_background" />
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Bloquear Chamadas do Chip (SIM)"
-                android:textColor="#F8FAFC"
-                android:textSize="16sp" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call Shield"
+                    android:textColor="#38BDF8"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProtectionStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="● Proteção Ativa no Chip"
+                    android:textColor="#10B981"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/badgeRoleStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chamadas VoIP (WhatsApp/Telegram) continuam liberadas."
-                android:textColor="#64748B"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:text="OPERADORA"
+                android:textColor="#38BDF8"
+                android:textSize="10sp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:background="#1E293B" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Card de Gravação -->
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="#1E293B">
+        <!-- Banner Otimização de Bateria (Se necessário para não fechar sozinho) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBatteryWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="#271818"
+            app:strokeColor="#EF4444"
+            app:strokeWidth="1dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ Evitar que o Android desligue o App"
+                    android:textColor="#F87171"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O sistema pode suspender o Call Shield em segundo plano. Toque abaixo para desativar a otimização de bateria."
+                    android:textColor="#CBD5E1"
+                    android:textSize="11sp"
+                    android:layout_marginTop="2dp" />
+
+                <Button
+                    android:id="@+id/btnIgnoreBatteryOpt"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Desativar Economia de Bateria"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Grid de Estatísticas e Telemetria -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_marginBottom="16dp">
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switchRecordCalls"
+            <!-- Card 1: Bloqueios -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#131F37">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tvBlockedCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#F43F5E"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bloqueadas (SIM)"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 2: Gravações -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="3dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#131F37">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tvRecordingsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#38BDF8"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gravações Áudio"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 3: WhatsApp Liberado -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#131F37">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100%"
+                        android:textColor="#10B981"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WhatsApp/VoIP"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Card de Bloqueio SIM -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="#1E293B">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Gravar Chamadas Ativas"
-                android:textColor="#F8FAFC"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchBlockCalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bloqueio de Chamadas do Chip (SIM)"
+                    android:textColor="#F8FAFC"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rejeita silenciosamente as ligações de voz da operadora. WhatsApp, Telegram e Teams continuam funcionando 100%."
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card de Gravação -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="#1E293B">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switchRecordCalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gravar Chamadas Telefônicas"
+                    android:textColor="#F8FAFC"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inicia gravação automática quando a chamada é atendida e salva o áudio nos arquivos de mídia do dispositivo."
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Seção: Histórico e Logs em Tempo Real -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Salva os áudios na pasta de Mídia com data e número."
+                android:layout_weight="1"
+                android:text="ÚLTIMAS CHAMADAS BLOQUEADAS"
                 android:textColor="#64748B"
                 android:textSize="12sp"
-                android:layout_marginTop="4dp" />
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnClearHistory"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Limpar"
+                android:textSize="11sp"
+                android:textColor="#94A3B8"
+                android:padding="0dp" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <!-- Container do Histórico -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="#1E293B">
 
-    <!-- Botão de Desinstalação -->
-    <Button
-        android:id="@+id/btnUninstall"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Desinstalar Aplicativo"
-        android:textColor="#EF4444"
-        android:layout_marginBottom="16dp" />
+            <LinearLayout
+                android:id="@+id/containerCallLogs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tvEmptyLogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nenhuma chamada bloqueada ainda.\nQuando uma ligação do chip for interceptada, o número e a data aparecerão aqui."
+                    android:textColor="#64748B"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:paddingVertical="18dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botão de Simulação de Teste para o Usuário -->
+        <Button
+            android:id="@+id/btnSimulateBlock"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Simular Chamada Bloqueada (Teste)"
+            android:textColor="#38BDF8"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Botão de Desinstalação -->
+        <Button
+            android:id="@+id/btnUninstall"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Desinstalar Call Shield"
+            android:textColor="#EF4444"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>

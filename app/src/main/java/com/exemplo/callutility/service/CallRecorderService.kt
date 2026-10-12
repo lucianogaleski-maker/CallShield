@@ -77,6 +77,9 @@ class CallRecorderService : Service() {
                 reset()
                 release()
             }
+            // Incrementa contador de gravações salvas
+            val prefs = com.exemplo.callutility.data.PrefsManager(this)
+            prefs.recordingsCount++
         } catch (e: Exception) {
             e.printStackTrace()
         }
