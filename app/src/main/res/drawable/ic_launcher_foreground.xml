@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Escudo Ciano / Azul -->
+    <path
+        android:fillColor="#38BDF8"
+        android:pathData="M54,22 L32,32 V52 C32,69 41.5,84 54,88 C66.5,84 76,69 76,52 V32 L54,22 Z" />
+        
+    <!-- Telefone Interno Branco -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,43 C48,43 47,43.8 47,45 C47,54 54,61 63,61 C64.2,61 65,60 65,59 L62.5,54.5 C62.2,54 61.5,53.8 61,54 L58,55 C55.5,53.8 54.2,52.5 53,50 L54,47 C54.2,46.5 54,45.8 53.5,45.5 L49,43 Z" />
+</vector>
